@@ -1,0 +1,18 @@
+<vm:MainViewModel 
+    xmlns:vm="clr-namespace:HighThroughputDataGrid.ViewModel" 
+    xmlns:m="clr-namespace:HighThroughputDataGrid">
+    <vm:MainViewModel.Stocks xmlns:common="clr-namespace:HighThroughputDataGrid.Common" RefreshRate="98.63" IsRunning="False">
+        <m:StockCollection>
+            <m:Stock Symbol="AFST" CompanyName="Amtrust Financial Service Inc" Close="26.17" High="39.13" Low="23.27" Ask="24.39" Bid="24.14" Last="24.39" Change="-1.78" Volumn="652253"/>
+            <m:Stock Symbol="AFT" CompanyName="Apollo Senior Floating Rate Fund Inc" Close="16.13" High="23.91" Low="13.80" Ask="14.46" Bid="14.32" Last="14.46" Change="-1.67" Volumn="1447922"/>
+            <m:Stock Symbol="AG" CompanyName="First Majestic Silver" Close="12.26" High="18.80" Low="11.14" Ask="11.58" Bid="11.47" Last="11.58" Change="-0.68" Volumn="153680751"/>
+            <m:Stock Symbol="AGI" CompanyName="Alamos Gold Inc" Close="7.67" High="12.04" Low="7.48" Ask="8.01" Bid="7.93" Last="8.01" Change="0.34" Volumn="97323176"/>
+            <m:Stock Symbol="AGM" CompanyName="Federal Agricultural Mortgage Corp" Close="34.48" High="37.75" Low="33.31" Ask="35.43" Bid="35.07" Last="35.43" Change="0.95" Volumn="5177807"/>
+            <m:Stock Symbol="BAF" CompanyName="Blackrock Income Inv Quality Trust" Close="15.73" High="15.89" Low="15.68" Ask="15.83" Bid="15.83" Last="15.83" Change="0.10" Volumn="12648"/>
+            <m:Stock Symbol="BAH" CompanyName="Booz Allen Hamilton Holding Corp" Close="28.90" High="29.19" Low="28.21" Ask="29.08" Bid="29.06" Last="29.08" Change="0.18" Volumn="397734"/>
+            <m:Stock Symbol="BAN-C" CompanyName="Banc of California Inc. Deposi" Close="26.77" High="26.88" Low="26.64" Ask="26.77" Bid="26.50" Last="26.75" Change="-0.02" Volumn="1212"/>
+            <m:Stock Symbol="BAP" CompanyName="Credicorp Ltd" Close="144.24" High="145.81" Low="143.78" Ask="145.05" Bid="143.60" Last="145.05" Change="0.81" Volumn="688258"/>
+        </m:StockCollection>
+    </vm:MainViewModel.Stocks>
+ </vm:MainViewModel>
+

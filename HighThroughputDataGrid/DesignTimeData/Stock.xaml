@@ -1,0 +1,2 @@
+﻿<local:Stock xmlns:local="clr-namespace:HighThroughputDataGrid"
+              Symbol="AG" CompanyName="First Majestic Silver" Close="12.26" High="18.80" Low="11.14" Ask="11.58" Bid="11.47" Last="11.58" Change="-0.68" Volumn="153680751"/>

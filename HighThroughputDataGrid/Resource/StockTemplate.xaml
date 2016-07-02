@@ -1,0 +1,143 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HighThroughputDataGrid"
+                    xmlns:common="clr-namespace:HighThroughputDataGrid.Common">
+
+    <common:IsNumberNegativeConverter x:Key="IsNumberNegativeConverter"/>
+    <SolidColorBrush x:Key="PositiveValueBrush" Color="#228B22"/>
+    
+    <DataTemplate x:Key="StockDataTemplate" DataType="{x:Type local:Stock}">
+        <Grid x:Name="_row" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="Symbol" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="CompanyName" Width="*"/>
+                <ColumnDefinition SharedSizeGroup="Open" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="High" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="Low" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="Ask" Width="Auto" />
+                <ColumnDefinition SharedSizeGroup="Bid" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="Last" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="Change" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="ChangeInPercentage" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="Close" Width="Auto"/>
+                <ColumnDefinition SharedSizeGroup="Volumn" Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="{Binding Symbol}" FontWeight="Bold" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="DarkGray" HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding CompanyName}" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="2" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="{Binding Close, StringFormat={}{0:0.00}}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="3" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="{Binding High, StringFormat={}{0:0.00}}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="4" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="{Binding Low, StringFormat={}{0:0.00}}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="5" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="{Binding Ask, StringFormat={}{0:0.00}}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="6" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="{Binding Bid, StringFormat={}{0:0.00}}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="7" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock x:Name="_last" Text="{Binding Last, StringFormat={}{0:0.00}}" FontWeight="Bold" 
+                           Foreground="{StaticResource PositiveValueBrush}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="8" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock x:Name="_change" Text="{Binding Change, StringFormat={}{0:+0.00;-0.00}}" FontWeight="Bold" 
+                           Foreground="{StaticResource PositiveValueBrush}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="9" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock x:Name="_percent" Text="{Binding ChangeInPercentage, StringFormat={}{0:+0.00%;-0.00%}}" FontWeight="Bold" 
+                           Foreground="{StaticResource PositiveValueBrush}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="10" BorderThickness="0,0,1,0" BorderBrush="DarkGray" Width="70">
+                <TextBlock Text="-" HorizontalAlignment="Center" Padding="5,0"/>
+            </Border>
+            <Border Grid.Column="11" BorderThickness="0,0,0,0" BorderBrush="DarkGray" Width="90">
+                <TextBlock Text="{Binding Volumn, StringFormat={}{0:#,##0}}" HorizontalAlignment="Right" Padding="5,0"/>
+            </Border>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Change, Converter={StaticResource IsNumberNegativeConverter}}" Value="True">
+                <Setter TargetName="_last" Property="Foreground" Value="#A53106"/>
+                <Setter TargetName="_change" Property="Foreground" Value="#A53106"/>
+                <Setter TargetName="_percent" Property="Foreground" Value="#A53106"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <ControlTemplate x:Key="StockControlTemplate" TargetType="{x:Type ListBox}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Width="{Binding ElementName=_scroll, Path=ViewportWidth}" HorizontalAlignment="Left">
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Symbol" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="CompanyName" Width="*"/>
+                    <ColumnDefinition SharedSizeGroup="Open" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="High" Width="Auto" />
+                    <ColumnDefinition SharedSizeGroup="Low" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="Ask" Width="Auto" />
+                    <ColumnDefinition SharedSizeGroup="Bid" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="Last" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="Change" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="ChangeInPercentage" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="Close" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="Volumn" Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Symbol"/>
+                </Border>
+                <Border Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="DarkGray" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Company"/>
+                </Border>
+                <Border Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="DarkGray"  Width="70">
+                    <TextBlock Text="Open"/>
+                </Border>
+                <Border Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="DarkGray"  Width="70">
+                    <TextBlock Text="High"/>
+                </Border>
+                <Border Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Low"/>
+                </Border>
+                <Border Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Ask"/>
+                </Border>
+                <Border Grid.Column="6" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Bid"/>
+                </Border>
+                <Border Grid.Column="7" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Last"/>
+                </Border>
+                <Border Grid.Column="8" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Change"/>
+                </Border>
+                <Border Grid.Column="9" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Percent"/>
+                </Border>
+                <Border Grid.Column="10" BorderThickness="0,0,1,1" BorderBrush="DarkGray" Width="70">
+                    <TextBlock Text="Close"/>
+                </Border>
+                <Border Grid.Column="11" BorderThickness="0,0,0,1" BorderBrush="DarkGray" Width="90">
+                    <TextBlock Text="Volumn"/>
+                </Border>
+            </Grid>
+            <ScrollViewer Grid.Row="1" x:Name="_scroll" CanContentScroll="true" PanningMode="VerticalOnly">
+                <ItemsPresenter/>
+            </ScrollViewer>
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>
